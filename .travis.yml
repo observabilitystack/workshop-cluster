@@ -20,5 +20,5 @@ install:
 script:
   - ansible-lint bootstrap.yml
   - ansible-lint workshop.yml
-  - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint --error-with-issues
+  - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint
   
