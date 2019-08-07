@@ -1,0 +1,15 @@
+---
+- name: create facts.d folder
+  file:
+    name: /etc/ansible/facts.d
+    state: directory
+
+- name: gather hcloud facts
+  get_url:
+    url: "https://api.hetzner.cloud/v1/servers/{{ id }}"
+    headers:
+      Authorization: "Bearer {{ lookup('env','HCLOUD_TOKEN') }}"
+    dest: /etc/ansible/facts.d/hcloud.fact
+
+- name: update ansible facts
+  setup:

@@ -1,4 +1,5 @@
 ---
+- include: hcloud.yml
 - include: selinux.yml
 - include: packages.yml
 - include: user.yml
