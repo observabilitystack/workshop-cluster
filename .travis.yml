@@ -2,6 +2,9 @@ dist: bionic
 language: python
 python: "2.7"
 
+services:
+  - docker
+
 env:
   - ANSIBLE_VERSION=latest
   - ANSIBLE_VERSION=2.8.3
@@ -13,11 +16,9 @@ install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
   - pip install ansible-lint
-  - curl -fsSL https://raw.githubusercontent.com/wata727/tflint/master/install_linux.sh|bash
 
 script:
   - ansible-lint bootstrap.yml
   - ansible-lint workshop.yml
-  - tflint
-
+  - docker run --rm -v $(pwd):/app/ --workdir=/app/ -t wata727/tflint --error-with-issues
   
