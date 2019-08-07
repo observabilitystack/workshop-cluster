@@ -1,0 +1,21 @@
+dist: bionic
+language: python
+python: "2.7"
+
+env:
+  - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.8.3
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  # Install Ansible.
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - pip install ansible-lint
+
+script:
+  - ansible-lint bootstrap.yml
+  - ansible-lint workshop.yml
+
+  
