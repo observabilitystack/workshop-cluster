@@ -3,5 +3,6 @@
   become: true
   become_user: workshop
   git:
-    repo: https://github.com/observabilitystack/k8s-observability-workshop.git
-    dest: /home/workshop/observability-workshop
+    repo: "{{ workshop.source.repo }}"
+    dest: "{{ workshop.source.dest }}"
+    version: master

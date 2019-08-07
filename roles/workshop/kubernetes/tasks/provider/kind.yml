@@ -6,8 +6,9 @@
     url: https://github.com/kubernetes-sigs/kind/releases/download/v0.3.0/kind-linux-amd64
 
 - name: create cluster
+  become: true
   become_user: workshop
-  shell: /usr/local/bin/kind create cluster
+  command: /usr/local/bin/kind create cluster
   args:
     creates: /home/workshop/.kube/kind-config-kind
 

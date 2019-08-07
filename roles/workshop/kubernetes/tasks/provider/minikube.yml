@@ -6,12 +6,12 @@
     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
 - name: start minikube
-  shell: minikube start --vm-driver=none
+  command: minikube start --vm-driver=none
   args:
     creates: /root/.minikube
 
 - name: make minikube accessible to workshop user
-  shell: mv /root/.kube /root/.minikube /home/workshop/
+  command: mv /root/.kube /root/.minikube /home/workshop/
   args:
     creates: /home/workshop/.minikube
 
@@ -35,7 +35,7 @@
 - name: enable minikube addons
   become: true
   become_user: workshop
-  shell: "/usr/local/bin/minikube addons enable {{ item }}"
+  command: "/usr/local/bin/minikube addons enable {{ item }}"
   args:
     creates: "/etc/kubernetes/addons/{{ item }}-*.yml"
   loop:

@@ -1,8 +1,9 @@
 ---
-- name: configure TLS secrets
+- name: configure TLS secrets # noqa 301
   become: true
   become_user: workshop
   shell: |
+    set -o pipefail
     kubectl -n {{ item }} \
     create secret tls \
     {{ inventory_hostname }}.{{ workshop_domain }}-tls \

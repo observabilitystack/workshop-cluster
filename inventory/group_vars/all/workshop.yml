@@ -14,4 +14,7 @@ workshop:
       ssh_key: ""
 #    - name: bob
 #    - name: charlie
+  source:
+    repo: https://github.com/observabilitystack/k8s-observability-workshop.git
+    dest: /home/workshop/observability-workshop
 

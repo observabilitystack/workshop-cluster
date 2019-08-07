@@ -1,5 +1,7 @@
 # Generic workshop cluster setup
 
+![Travis CI build status](https://travis-ci.org/observabilitystack/workshop-cluster.svg?branch=master)
+
 This repository holds resources to set up a general workshop 
 cluster. Use powerful cloud servers for your workshop. Remove
 the software installment hassle on local laptops. Upon setup, 
