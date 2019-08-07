@@ -13,9 +13,11 @@ install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
   - pip install ansible-lint
+  - curl -sfL https://raw.githubusercontent.com/wata727/tflint/master/install_linux.sh | bash
 
 script:
   - ansible-lint bootstrap.yml
   - ansible-lint workshop.yml
+  - tflint
 
   
