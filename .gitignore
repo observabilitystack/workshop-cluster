@@ -1,2 +1,2 @@
 roles/bootstrap/tls/files/*.pem
-.terraform
+.terraform*

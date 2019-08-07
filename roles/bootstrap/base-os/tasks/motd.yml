@@ -5,11 +5,12 @@
     dest: /etc/motd.image
     force: no
   with_random_choice: "{{ lookup('fileglob', 'files/streetfighters/*.txt', wantlist=True) }}"
+  notify:
+    - compose motd message
 
 - name: template motd facts
   template:
     src: motd.j2
     dest: /etc/motd.facts
-
-- name: compose final motd message
-  shell: "paste /etc/motd.image /etc/motd.facts > /etc/motd"
+  notify:
+    - compose motd message

@@ -42,10 +42,11 @@
     - python-pip
 
 - name: upgrade python-pip
-  shell: "{{ item }}"
-  loop:
-    - "pip install --upgrade pip"
-    - "pip install --upgrade setuptools"
+  pip:
+    name:
+      - pip
+      - setuptools
+    extra_args: --upgrade
 
 - name: download bat
   unarchive:
