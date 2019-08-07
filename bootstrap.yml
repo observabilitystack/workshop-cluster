@@ -1,0 +1,10 @@
+---
+# prepares the host for general access, configures firewall,
+# general utility packages and installs docker. The workshop
+# user is created and ssh keys are put in place.
+- hosts: all
+  roles:
+    - base-os
+#    - firewall
+    - docker
+    - tls
