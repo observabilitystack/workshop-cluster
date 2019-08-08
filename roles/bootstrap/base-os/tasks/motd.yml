@@ -8,6 +8,23 @@
   notify:
     - compose motd message
 
+- name: copy dc location map
+  copy:
+    src: "maps/{{ ansible_local['hcloud']['server']['datacenter']['location']['country'] }}.map"
+    dest: /etc/motd.map
+    force: no
+  notify:
+    - compose motd message
+
+- name: name data center location on map
+  lineinfile:
+    path: /etc/motd.map
+    regexp: '^(.*)X'
+    line: '\1X <-- {{ ansible_local["hcloud"]["server"]["datacenter"]["description"] }}'
+    backrefs: yes
+  notify:
+    - compose motd message
+
 - name: template motd facts
   template:
     src: motd.j2

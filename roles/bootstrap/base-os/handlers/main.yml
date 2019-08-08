@@ -2,4 +2,4 @@
   reboot:
 
 - name: compose motd message
-  shell: "paste /etc/motd.image /etc/motd.facts > /etc/motd"
+  shell: "cat /etc/motd.map > /etc/motd && paste /etc/motd.image /etc/motd.facts >> /etc/motd"
