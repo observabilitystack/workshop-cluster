@@ -1,8 +1,6 @@
 
 terraform {
-  # we are limited to this version until the terraform-inventory
-  # works with 0.12s
-  required_version = "~> 0.11"
+  required_version = "~> 0.12"
   
   # synchronize cluster state across trainers
   backend "remote" {
