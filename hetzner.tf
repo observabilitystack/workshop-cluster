@@ -80,3 +80,8 @@ resource "local_file" "certificates" {
     filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}.pem"
 }
 
+# Outputs the hostnames to the Ansible inventory file
+resource "local_file" "write_inventory_for_ansible" {
+    content     = "[workshop]\n${join("\n", random_pet.server.*.id)}"
+    filename = "./inventory/inventory"
+}
