@@ -19,7 +19,7 @@
   loop: "{{ workshop.trainers | union(workshop.participants) }}"
 
 - name: install sane bashrc for all users
-  copy:
+  template:
     src: bashrc
     dest: "{{ item.home }}/.bashrc"
     owner: "{{ item.user }}"

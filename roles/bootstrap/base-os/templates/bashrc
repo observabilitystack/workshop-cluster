@@ -16,4 +16,7 @@ alias rm='rm -i'
 alias df='df -h'
 alias ll='ls -l'
 
+# set domain name in environment
+export DOMAIN_NAME={{ workshop_domain }}
+
 # Custom additions
