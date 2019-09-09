@@ -43,11 +43,9 @@ variable "instance_count" {
 
 __2. Prepare your local machine__ for cluster setup:
 
-> ⚠️ We need to stick to Terraform 0.11 until [this PR is merged in terraform-inventory](https://github.com/adammck/terraform-inventory/pull/114) and available as release!
-
 ```
-brew install terraform@0.11 ansible terraform-inventory figlet
-brew link terraform@0.11 --force
+brew install terraform@0.12 ansible terraform-inventory figlet
+brew link terraform@0.12 --force
 ```
 
 __3. Prepare remote shared state__
