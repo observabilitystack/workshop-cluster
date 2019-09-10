@@ -41,10 +41,10 @@ resource "hcloud_server" "workshop" {
 }
 
 # This creates a DNS record as a subdomain of
-# k8s.012stack.org that points to the host
+# the workshop domain that points to the host
 resource "digitalocean_record" "hostname" {
   count  = "${var.instance_count}"
-  domain = "k8s.o12stack.org"
+  domain = "${var.domain}"
   type   = "A"
   name   = "${element(hcloud_server.workshop.*.name, count.index)}"
   value  = "${element(hcloud_server.workshop.*.ipv4_address, count.index)}"
@@ -55,10 +55,10 @@ resource "digitalocean_record" "hostname" {
 # on our workshop servers later
 resource "digitalocean_record" "wildcard" {
   count  = "${var.instance_count}"
-  domain = "k8s.o12stack.org"
+  domain = "${var.domain}"
   type   = "CNAME"
   name   = "*.${element(hcloud_server.workshop.*.name, count.index)}"
-  value  = "${element(hcloud_server.workshop.*.name, count.index)}.k8s.o12stack.org."
+  value  = "${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}."
 }
 
 # Create a private key to request TLS certs with
@@ -67,17 +67,17 @@ resource "tls_private_key" "private_key" {
 }
 
 # Register an account with ACMEs
-resource "acme_registration" "o12stack" {
+resource "acme_registration" "account" {
   account_key_pem = "${tls_private_key.private_key.private_key_pem}"
-  email_address   = "nobody@o12stack.org"
+  email_address   = "${var.acme_email_address}"
 }
 
 # Request wildcard TLS cert
 resource "acme_certificate" "certificate" {
   count                     = "${var.instance_count}"
-  account_key_pem           = "${acme_registration.o12stack.account_key_pem}"
-  common_name               = "*.${element(hcloud_server.workshop.*.name, count.index)}.k8s.o12stack.org"
-  subject_alternative_names = ["${element(hcloud_server.workshop.*.name, count.index)}.k8s.o12stack.org"]
+  account_key_pem           = "${acme_registration.account.account_key_pem}"
+  common_name               = "*.${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}"
+  subject_alternative_names = ["${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}"]
 
   dns_challenge {
     provider = "digitalocean"
@@ -88,6 +88,6 @@ resource "acme_certificate" "certificate" {
 resource "local_file" "certificates" {
     count    = "${var.instance_count}"
     content  = "${element(acme_certificate.certificate.*.certificate_pem, count.index)}${element(acme_certificate.certificate.*.issuer_pem, count.index)}${element(acme_certificate.certificate.*.private_key_pem, count.index)}"
-    filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.k8s.o12stack.org.pem"
+    filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}.pem"
 }
 
