@@ -9,3 +9,12 @@ variable "domain" {
 variable "acme_email_address" {
   default = "nobody@o12stack.org"
 }
+
+# names/references of all the root keys we use to
+# access and provision servers
+# The SSH public keys are stored at the cloud provider
+# under this name/these names
+# (comma separated list)
+variable "ssh_key_names" {
+  default = "o12stack-torsten,o12stack-nikolaus"
+}

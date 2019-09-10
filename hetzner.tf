@@ -13,17 +13,6 @@ terraform {
   }
 }
 
-# This is the root key we use to access and provison
-# servers at the hetzner provider. If not present, it
-# will be created under the given name
-data "hcloud_ssh_key" "o12stack-torsten" {
-  name       = "o12stack-torsten"
-}
-data "hcloud_ssh_key" "o12stack-nikolaus" {
-  name       = "o12stack-nikolaus"
-}
-
-
 # We use random pet names to name each workshop
 # server: numbers are boooooring
 resource "random_pet" "server" {
@@ -37,7 +26,7 @@ resource "hcloud_server" "workshop" {
   name        = "${element(random_pet.server.*.id, count.index)}"
   image       = "centos-7"
   server_type = "cx51"   # 8cpu
-  ssh_keys    = ["${data.hcloud_ssh_key.o12stack-torsten.name}", "${data.hcloud_ssh_key.o12stack-nikolaus.name}"]
+  ssh_keys    = "${split(",",var.ssh_key_names)}"
 }
 
 # This creates a DNS record as a subdomain of
