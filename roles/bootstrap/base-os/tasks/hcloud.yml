@@ -6,7 +6,7 @@
 
 - name: gather hcloud facts
   get_url:
-    url: "https://api.hetzner.cloud/v1/servers/{{ id }}"
+    url: "https://api.hetzner.cloud/v1/servers?{{ inventory_hostname }}"
     headers:
       Authorization: "Bearer {{ lookup('env','HCLOUD_TOKEN') }}"
     dest: /etc/ansible/facts.d/hcloud.fact

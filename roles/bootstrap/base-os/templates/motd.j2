@@ -5,4 +5,4 @@
  🖥️   {{ ansible_processor_vcpus }} x {{ ansible_processor[2] }}
  🗜️   {{ (ansible_memtotal_mb/1024) | round(2) }}GB
  💾  {{ ansible_distribution }} {{ ansible_distribution_version }}
- ☁️   {{ server_type }} @ {{ ansible_system_vendor}} datacenter {{ ansible_local['hcloud']['server']['datacenter']['description'] }} ({{ datacenter }})
+ ☁️   {{ ansible_local['hcloud']['servers'][0]['datacenter']['description'] }}
