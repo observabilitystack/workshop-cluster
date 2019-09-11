@@ -48,6 +48,7 @@ resource "digitalocean_record" "wildcard" {
   type   = "CNAME"
   name   = "*.${element(hcloud_server.workshop.*.name, count.index)}"
   value  = "${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}."
+  depends_on = ["acme_certificate.certificate"]  # make sure CNAME wildcard does not block DNS challenge
 }
 
 # Create a private key to request TLS certs with
