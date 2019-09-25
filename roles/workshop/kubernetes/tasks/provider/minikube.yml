@@ -3,7 +3,7 @@
   get_url:
     dest: /usr/local/bin/minikube
     mode: 0755
-    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    url: https://storage.googleapis.com/minikube/releases/{{ minikube.version }}/minikube-linux-amd64
 
 - name: start minikube
   command: minikube start --vm-driver=none
