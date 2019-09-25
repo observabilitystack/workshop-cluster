@@ -19,4 +19,4 @@ workshop:
     dest: /home/workshop/observability-workshop
 
 minikube:
-  version: v1.3.1s
+  version: v1.3.1
