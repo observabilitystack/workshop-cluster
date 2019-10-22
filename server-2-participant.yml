@@ -1,0 +1,14 @@
+# Assign hosts to the workshop participants
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Assign servers to participants
+      debug:
+        msg: "{{ participant.name }} --> {{ groups['all'][ i ] }}.{{ workshop_domain }}"
+      loop: "{{ workshop.participants }}"
+      loop_control:
+        label: "{{ participant.name }}"
+        loop_var: participant
+        index_var: i
