@@ -17,6 +17,8 @@
     key: "{{ item.ssh_key }}"
     key_options: 'environment="REMOTE_USER={{ item.name }}"'
   loop: "{{ workshop.trainers | union(workshop.participants) }}"
+  tags:
+    - ssh:keys
 
 - name: install sane bashrc for all users
   template:
