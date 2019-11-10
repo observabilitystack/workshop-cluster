@@ -44,7 +44,7 @@ variable "instance_count" {
 __2. Prepare your local machine__ for cluster setup:
 
 ```
-brew install terraform@0.12 ansible terraform-inventory figlet
+brew install terraform@0.12 ansible figlet
 brew link terraform@0.12 --force
 ```
 
@@ -94,9 +94,11 @@ ansible-playbook workshop.yml
 
 ## Workshop day
 
-Assign each participant an individual server. Keys are distributed to all machines, so participants could switch (or share) servers. This will list all available hosts:
+Assign each participant an individual server. Keys are distributed to all machines, so participants could switch (or share) servers.
 
-    ansible workshop --list-hosts
+```
+ansible-playbook server-2-participant.yml
+```
 
 If you have some late arrivals, adjust the server count in the _Terraform_ file and re-run the steps above. Only the one additional server will be created and provisioned.
 
