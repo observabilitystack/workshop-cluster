@@ -13,17 +13,25 @@ terraform {
   }
 }
 
-# We use random pet names to name each workshop
-# server: numbers are boooooring
-resource "random_pet" "server" {
-  count       = "${var.instance_count}"
+# Write a local Ansible inventory
+
+# Useful for WORKSHOP PREPARATION
+#
+# To just create the inventory file w/o creating servers:
+#   terraform apply -target=local_file.write_inventory_for_ansible
+#
+# To see the assignment of participants and servers:
+#   ansible-playbook server-2-participant.yml 
+resource "local_file" "write_inventory_for_ansible" {
+    content     = "[workshop]\n${join("\n", slice(var.server_names, 0, var.instance_count))}"
+    filename = "./inventory/inventory"
 }
 
 # This creates the workshop servers. Increase count
 # to the number of participants
 resource "hcloud_server" "workshop" {
   count       = "${var.instance_count}"
-  name        = "${element(random_pet.server.*.id, count.index)}"
+  name        = "${element(var.server_names, count.index)}"
   image       = "centos-7"
   server_type = "cx51"   # 8cpu
   ssh_keys    = "${split(",",var.ssh_key_names)}"
@@ -81,9 +89,3 @@ resource "local_file" "certificates" {
     filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}.pem"
 }
 
-# Write a local Ansible inventory and refrein using terraform-inventory
-# (as it is horribly slow)
-resource "local_file" "write_inventory_for_ansible" {
-    content     = "[workshop]\n${join("\n", random_pet.server.*.id)}"
-    filename = "./inventory/inventory"
-}
