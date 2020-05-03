@@ -1,3 +1,4 @@
 roles/bootstrap/tls/files/*.pem
-.terraform*
+**/.terraform*
+**/secrets*.tfvars
 inventory/inventory
