@@ -17,10 +17,3 @@ firewall:
 # This depends on the image and/or provider u are using. In our case,
 # centos at Hetzner uses root as first default user
 ansible_user: root
-
-# The location of your keyfile on your local laptop
-ansible_ssh_private_key_file: ~/.ssh/hetzner-o12stack.id_rsa
-
-# the domain that is appended to the randomly generated server names.
-workshop_domain: k8s.o12stack.org
-ansible_host: "{{ inventory_hostname }}.{{ workshop_domain }}"

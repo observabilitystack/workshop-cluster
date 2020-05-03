@@ -20,7 +20,7 @@ resource "hcloud_server" "workshop" {
   for_each    = var.server_names
   name        = each.key
   image       = "centos-8"
-  server_type = "cx51"   # 8cpu
+  server_type = "cx31"
   ssh_keys    = var.ssh_key_names
 }
 
@@ -42,7 +42,7 @@ resource "digitalocean_record" "wildcard" {
   domain = var.domain
   type   = "CNAME"
   name   = "*.${each.value.name}"
-  value  = each.value.ipv4_address
+  value  = "${each.key}.${var.domain}."
 }
 
 # ---------------------------------------------------------------------
@@ -71,29 +71,31 @@ resource "acme_certificate" "certificate" {
 
   dns_challenge {
     provider = "digitalocean"
+    config = {
+      DO_AUTH_TOKEN = var.do_token
+    }
   }
 }
 
 # ---------------------------------------------------------------------
 # Write a local Ansible inventory
 # ---------------------------------------------------------------------
+locals {
+  ansible_inventory = <<EOT
+all:
+  hosts:
+    %{~ for server in hcloud_server.workshop ~}
+    ${server.name}.${var.domain}:
+      acme_cert: |
+        ${indent(8, join("\n", [ 
+          acme_certificate.certificate[server.name].certificate_pem, 
+          acme_certificate.certificate[server.name].issuer_pem, 
+          acme_certificate.certificate[server.name].private_key_pem 
+        ]))}
+    %{~ endfor ~}
+EOT
+}
 
-# Useful for WORKSHOP PREPARATION
-#
-# To just create the inventory file w/o creating servers:
-#   terraform apply -target=local_file.write_inventory_for_ansible
-#
-# To see the assignment of participants and servers:
-#   ansible-playbook server-2-participant.yml 
-#resource "local_file" "write_inventory_for_ansible" {
-#    content     = "[workshop]\n${join("\n", slice(var.server_names, 0, var.instance_count))}"
-#    filename = "./inventory/inventory"
-#}
-
-# write TLS certs into Ansible
-#resource "local_file" "certificates" {
-#    count    = "${var.instance_count}"
-#    content  = "${element(acme_certificate.certificate.*.certificate_pem, count.index)}${element(acme_certificate.certificate.*.issuer_pem, count.index)}${element(acme_certificate.certificate.*.private_key_pem, count.index)}"
-#    filename = "./roles/bootstrap/tls/files/${element(hcloud_server.workshop.*.name, count.index)}.${var.domain}.pem"
-#}
-
+output "ansible_inventory" {
+  value = local.ansible_inventory
+} 

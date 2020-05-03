@@ -1,16 +1,18 @@
 variable "hcloud_token" {}
 
+variable "do_token" {}
+
 variable "server_names" {
   type = set(string)
   default = [
-    "evolving-lionfish"
+#    "evolving-lionfish",
 #    "wired-lizard",
 #    "flowing-tadpole",
 #    "touched-firefly",
 #    "super-eft",
 #    "unique-pony",
-#    "meet-moose",
-#    "next-camel",
+    "meet-moose",
+    "next-camel"
 #    "proper-bull",
 #    "fine-seal",
 #    "credible-alpaca",

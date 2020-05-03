@@ -8,6 +8,7 @@ provider "hcloud" {
 # We use Digital Ocean for DNS
 provider "digitalocean" {
   version = "~> 1.17"
+  token   = var.do_token
 }
 
 # we use the random provider to assign
