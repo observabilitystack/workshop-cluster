@@ -5,6 +5,6 @@
     state: directory
 
 - name: write tls wildcard cert
-  file:
-    name: "/etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem"
+  copy:
+    dest: "/etc/certficates/{{ inventory_hostname }}.pem"
     content: "{{ acme_cert }}"

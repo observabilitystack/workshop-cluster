@@ -6,19 +6,20 @@
 
 - name: Install Docker
   yum:
-    name: "{{ item }}"
-  loop:
-    - yum-utils
-    - device-mapper-persistent-data
-    - lvm2
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+      - docker-ce
+      - docker-ce-cli
+      - https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.10-3.2.el7.x86_64.rpm
 
 - name: get docker-compose
   get_url:
     dest: /usr/local/bin/docker-compose
-    url: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
 
 - name: make docker-compose executable
   file:
