@@ -1,13 +1,13 @@
 # Configure the Hetzner Cloud Provider using
 # a token from our enviornment
 provider "hcloud" {
-  version = "~> 1.16"
+  version = "~> 1.21"
   token   = var.hcloud_token
 }
 
 # We use Digital Ocean for DNS
 provider "digitalocean" {
-  version = "~> 1.17"
+  version = "~> 1.22"
   token   = var.do_token
 }
 
@@ -26,7 +26,7 @@ provider "acme" {
 
 # Use this to create ACME tls private keys
 provider "tls" {
-  version = "~> 2.1"
+  version = "~> 2.2"
 }
 
 # Use this to write ACME certs to file

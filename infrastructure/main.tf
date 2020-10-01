@@ -1,18 +1,3 @@
-
-terraform {
-  required_version = "~> 0.12"
-  
-  # synchronize cluster state across trainers
-  backend "remote" {
-    organization = "o12stack"
-    workspaces {
-      name = "workshop-cluster-test"
-    }
-
-    # credentials are read from .terraformrc
-  }
-}
-
 # ---------------------------------------------------------------------
 # Create the workshop servers
 # ---------------------------------------------------------------------
