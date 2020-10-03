@@ -11,9 +11,9 @@ variable "server_names" {
 #    "touched-firefly",
 #    "super-eft",
 #    "unique-pony",
-    "meet-moose",
-    "next-camel"
-#    "proper-bull",
+#    "meet-moose",
+#    "next-camel"
+    "proper-bull",
 #    "fine-seal",
 #    "credible-alpaca",
 #    "brave-molly",

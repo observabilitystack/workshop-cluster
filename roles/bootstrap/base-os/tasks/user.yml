@@ -9,6 +9,7 @@
     comment: A workshop user
     uid: "3000"
     group: "workshop"
+    #password: "{{ ansible_hostname | reverse | password_hash('sha512', ansible_hostname) }}"
 
 - name: Place ssh keys for user workshop
   authorized_key:

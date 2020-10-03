@@ -38,4 +38,10 @@ workshops resources.
 
 ![alt](docs/vscode_open_remote_folder.png)
 
+## TL;DR
 
+```bash
+cd infrastructure && tf apply
+tf output ansible_inventory > ../inventory/all.yaml 
+cd ..
+```
