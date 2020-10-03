@@ -5,7 +5,7 @@ resource "hcloud_server" "workshop" {
   for_each    = var.server_names
   name        = each.key
   image       = "centos-8"
-  server_type = "cx31"
+  server_type = "cx51"
   ssh_keys    = var.ssh_key_names
 }
 
