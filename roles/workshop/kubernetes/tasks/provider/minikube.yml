@@ -1,4 +1,11 @@
 ---
+- name: Install minkube prerequisites
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - conntrack-tools
+
 - name: install minikube
   get_url:
     dest: /usr/local/bin/minikube
