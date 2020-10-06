@@ -19,7 +19,7 @@
 - name: get docker-compose
   get_url:
     dest: /usr/local/bin/docker-compose
-    url: https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
 
 - name: make docker-compose executable
   file:
