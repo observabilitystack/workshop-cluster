@@ -1,0 +1,12 @@
+- name: configure code-server
+  become: true
+  become_user: workshop
+  k8s:
+    definition: "{{ lookup(item.type, 'k8s/' + item.name) }}"
+  loop:
+    - name: "code-server.yaml"
+      type: "file"
+    - name: "code-server-ingress.yaml.j2"
+      type: "template"
+  tags:
+    - now

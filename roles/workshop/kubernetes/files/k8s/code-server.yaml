@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+  namespace: kube-system
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      name: code-server
+      labels:
+        app: code-server
+    spec:
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
+      containers:
+      - name: code-server
+        image: codercom/code-server:3.5.0
+        ports:
+        - name: http
+          containerPort: 8080
+        volumeMounts:
+        - name: workshop-home
+          mountPath: /home/coder/project
+      volumes:
+      - name: workshop-home
+        hostPath:
+          path: /home/workshop
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: code-server
+  namespace: kube-system
+spec:
+  selector:
+    app: code-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      name: web
