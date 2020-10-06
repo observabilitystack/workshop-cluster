@@ -5,6 +5,8 @@
   vars:
     packages:
     - conntrack-tools
+    - socat
+    - tc
 
 - name: install minikube
   get_url:
@@ -18,7 +20,10 @@
     creates: /root/.minikube
 
 - name: make minikube accessible to workshop user
-  command: mv /root/.kube /root/.minikube /home/workshop/
+  command: "cp -R {{ item}} /home/workshop/"
+  loop:
+    - /root/.kube
+    - /root/.minikube
   args:
     creates: /home/workshop/.minikube
 
