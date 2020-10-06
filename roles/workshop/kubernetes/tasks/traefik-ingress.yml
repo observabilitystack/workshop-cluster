@@ -6,9 +6,9 @@
     set -o pipefail
     kubectl -n {{ item }} \
     create secret tls \
-    {{ inventory_hostname }}.{{ workshop_domain }}-tls \
-    --key /etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem \
-    --cert /etc/certficates/{{ inventory_hostname }}.{{ workshop_domain }}.pem \
+    {{ inventory_hostname }}-tls \
+    --key /etc/certficates/{{ inventory_hostname }}.pem \
+    --cert /etc/certficates/{{ inventory_hostname }}.pem \
     --dry-run -o yaml | kubectl apply -f -
   loop:
     - default
@@ -26,6 +26,5 @@
       type: "file"
     - name: "traefik-ui.yaml.j2"
       type: "template"
-  tags:
-    - now
+
 
