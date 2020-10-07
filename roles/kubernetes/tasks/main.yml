@@ -2,4 +2,3 @@
 - include: kubectl.yml
 - include: provider/minikube.yml
 - include: traefik-ingress.yml
-- include: code-server.yml

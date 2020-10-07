@@ -1,0 +1,182 @@
+#cloud-config
+merge_how:
+ - name: list
+   settings: [append]
+ - name: dict
+   settings: [recurse_array]
+
+groups:
+  - workshop
+  - docker
+
+users:
+  - name: trainer
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: 
+      - workshop
+      - docker
+    shell: /bin/bash
+    uid: 2001
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDARWYEWnmadVHdutkneku0Rbbn+Ix83ZZH3Lyge3bmE12SAloiU580gmQKewSox4pIcKTTIgA7NKaW1nRexH7nc90Mmefhzr8u8pENKW/zuCcfA6Wvh0/q1YFNMaxEnWjIGTBebYD04tgTMcT85L3cv79L7nziZKHZNdBtBTmM/iVBipMq935u66HFXy0g1Kse7ebL/zZqPWdqqa8YD7jv9ftNgga6FzPlmJKegb10oFKY3542MgrgVfB5Hiq8ATWO/RuVN/iMdXYk6Q++TQoNxfAhqabmAlmbCPfdrH0GPNM+bY1olOVhuT69gSwt1qr0cCI7XIlqt7suiDucgECGmMUDCEV09yV1EiLaeJeOnsauFDu6gcNYw+ECMlu5GfKLlf1R++HH6Zjx/lALqQ4lbhbHlKUGkUzPEUtFLQchALdW2DQ0muRtES+Rdwivko4Ncp+S4L8948vSQzW96DiRKwGsN26IUEVHvZAAkpePsOZKyIR4QVt5QZ2qYZ0u1+f3xdWzRZThiSJmbrUilMJwzkbN9w0CG7Kcxsj0iXqzgNBd/dHWvRyXb0e78gnpEJSmFKMugeCFf36rqYP+ukLzTaOopWn+j4FW9UOdsAfwk1ld7vqtrtq/zb7EJrxKOHgQQyzNlhwizTFp7/RUBt0MqKZ4wS9EBrQZfugkjtSW4Q==
+  - name: workshop
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    no_user_group: true
+    groups: 
+      - workshop
+      - docker
+    shell: /bin/bash
+    uid: 3000
+
+#yum_repos:
+#  epel-modular:
+#    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/Modular/$basearch
+#    enabled: true
+#    gpgcheck: true
+#    gpgkey: https://mirror.de.leaseweb.net/epel/RPM-GPG-KEY-EPEL-8
+#    name: Extra Packages for Enterprise Linux Modular $releasever - $basearch
+#  epel:
+#    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/Everything/$basearch
+#    enabled: true
+#    gpgcheck: true
+#    gpgkey: https://mirror.de.leaseweb.net/epel/RPM-GPG-KEY-EPEL-8
+#    name: Extra Packages for Enterprise Linux $releasever - $basearch
+#    
+
+#packages:
+#  - joe
+#  - vim
+#  - emacs
+#  - nano
+#  - wget
+#  - git
+#  - zip
+#  - unzip
+#  - lsof
+#  - telnet
+#  - strace
+#  - vim-enhanced
+#  - tcpdump
+#  - nc
+#  - screen
+#  - htop
+#  - iotop
+#  - sl
+#  - bind-utils
+#  - pv
+#  - dos2unix
+#  - sysstat
+#  - psmisc
+#  - yum-utils
+#  - jq
+#  - ncdu
+#  - bash-completion
+#  - tar
+
+write_files:
+  - path: /etc/sysconfig/selinux
+    content: |
+      SELINUX=disabled
+      SELINUXTYPE=targeted
+    owner: root:root
+    permissions: '0644'
+  - path: /root/.bashrc
+    content: |
+      # Source global definitions
+      if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+      fi
+
+      # expand path
+      export PATH=/usr/local/bin:$${PATH}
+
+      # User specific aliases and functions
+      alias cp='cp -i'
+      alias mv='mv -i'
+      alias rm='rm -i'
+      alias df='df -h'
+      alias ll='ls -l'
+
+      # set domain name in environment
+      export DOMAIN_NAME=${workshop_domain}
+
+      # Custom additions
+    owner: root:root
+    permissions: '0644'
+  - path: /home/trainer/.bashrc
+    content: |
+      # Source global definitions
+      if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+      fi
+
+      # expand path
+      export PATH=/usr/local/bin:$${PATH}
+
+      # User specific aliases and functions
+      alias cp='cp -i'
+      alias mv='mv -i'
+      alias rm='rm -i'
+      alias df='df -h'
+      alias ll='ls -l'
+
+      # set domain name in environment
+      export DOMAIN_NAME=${workshop_domain}
+
+      # Custom additions
+    owner: root:root
+    permissions: '0644'
+  - path: /home/workshop/.bashrc
+    content: |
+      # Source global definitions
+      if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+      fi
+
+      # expand path
+      export PATH=/usr/local/bin:$${PATH}
+
+      # User specific aliases and functions
+      alias cp='cp -i'
+      alias mv='mv -i'
+      alias rm='rm -i'
+      alias df='df -h'
+      alias ll='ls -l'
+
+      # set domain name in environment
+      export DOMAIN_NAME=${workshop_domain}
+
+      # Custom additions
+    owner: root:root
+    permissions: '0644'
+
+
+runcmd:
+  # yum repos cannot be added in cloud-init 19.4
+  # https://github.com/canonical/cloud-init/pull/340
+  - dnf -y install epel-release
+  - dnf -y install joe vim emacs nano wget git zip unzip lsof telnet strace vim-enhanced tcpdump nc screen htop iotop sl bind-utils pv dos2unix sysstat psmisc yum-utils jq ncdu bash-completion tar
+
+  # workshop gid
+  - groupmod -g 3000 workshop
+  - chown trainer:workshop /home/trainer
+  - chown workshop:workshop /home/workshop
+
+  # acquire hcloud meta data
+  - mkdir -p /etc/ansible/facts.d
+  - 'curl -sfLo /etc/ansible/facts.d/hcloud.fact -H "Authorization: Bearer ${hcloud_token}" "https://api.hetzner.cloud/v1/servers/?$(hostname).${workshop_domain}"'
+
+  # upgrade pip
+  - pip3 install pip setuptools --upgrade
+
+  # default shasum to sha256sum
+  - ln -s /usr/bin/sha256sum /usr/bin/shasum
+
+  # install bat
+  - wget https://github.com/sharkdp/bat/releases/download/v0.16.0/bat-v0.16.0-x86_64-unknown-linux-musl.tar.gz
+  - tar zxf bat-v0.16.0-x86_64-unknown-linux-musl.tar.gz
+  - mv bat-v0.16.0-x86_64-unknown-linux-musl/bat /usr/local/bin/bat
+
+  # create general payload directory
+  - mkdir -p /www

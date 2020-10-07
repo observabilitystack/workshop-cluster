@@ -1,0 +1,9 @@
+- name: Place ssh keys for user workshop
+  authorized_key:
+    user: workshop
+    state: present
+    key: "{{ item.ssh_key }}"
+    key_options: 'environment="REMOTE_USER={{ item.name }}"'
+  loop: "{{ workshop.trainers | union(workshop.participants) }}"
+  tags:
+    - ssh:keys

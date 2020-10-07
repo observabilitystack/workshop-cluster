@@ -1,12 +1,34 @@
 # ---------------------------------------------------------------------
 # Create the workshop servers
 # ---------------------------------------------------------------------
+data "template_cloudinit_config" "workshop" {
+  gzip          = false
+  base64_encode = false
+
+  part {
+    content_type = "text/cloud-config"
+    content      = templatefile("cloud-init/default.yaml", {
+      workshop_domain = var.domain,
+      hcloud_token    = var.hcloud_token,
+    })
+  }
+  part {
+    content_type = "text/cloud-config"
+    content      = file("cloud-init/docker.yaml")
+  }
+  part {
+    content_type = "text/cloud-config"
+    content      = file("cloud-init/reboot.yaml")
+  }
+}
+
 resource "hcloud_server" "workshop" {
   for_each    = var.server_names
   name        = each.key
   image       = "centos-8"
   server_type = "cx51"
   ssh_keys    = var.ssh_key_names
+  user_data   = data.template_cloudinit_config.workshop.rendered
 }
 
 # This creates a DNS record as a subdomain of

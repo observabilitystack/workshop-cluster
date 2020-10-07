@@ -45,3 +45,13 @@ cd infrastructure && tf apply
 tf output ansible_inventory > ../inventory/all.yaml 
 cd ..
 ```
+
+## Questions?
+
+Do not hesitate to contact us by E-Mail, Twitter or [Slack](https://o12stack.slack.com/) if you have any questions:
+
+👨‍💻 | Torsten Köster | Nikolaus Winter
+---|------------ | -------------
+🌐 | [thiswayup.de](https://www.thiswayup.de) | [nikolauswinter.de](https://www.nikolauswinter.de)
+📧 | [tbk@thiswayup.de](mailto:tbk@thiswayup.de) | [training@nikolauswinter.de](mailto:training@nikolauswinter.de)
+🐦 | [@tboeghk](https://twitter.com/tboeghk) | [@backstreetkiwi](https://twitter.com/backstreetkiwi)

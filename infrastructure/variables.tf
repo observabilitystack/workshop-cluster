@@ -13,7 +13,7 @@ variable "server_names" {
 #    "unique-pony",
 #    "meet-moose",
 #    "next-camel"
-    "proper-bull",
+#    "proper-bull",
 #    "fine-seal",
 #    "credible-alpaca",
 #    "brave-molly",
@@ -24,7 +24,7 @@ variable "server_names" {
 #    "informed-wildcat",
 #    "hopeful-chamois",
 #    "choice-fox",
-#    "hardy-gnu",
+    "hardy-gnu",
 #    "rational-akita",
 #    "unique-osprey",
 #    "teaching-perch",
