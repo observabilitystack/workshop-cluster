@@ -2,31 +2,31 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: traefik-ingress-controller
+  name: traefik
   namespace: kube-system
 ---
 kind: DaemonSet
 apiVersion: apps/v1
 metadata:
-  name: traefik-ingress-controller
+  name: traefik
   namespace: kube-system
   labels:
-    k8s-app: traefik-ingress-lb
+    app: traefik
 spec:
   selector:
     matchLabels:
-      k8s-app: traefik-ingress-lb
+      app: traefik
   template:
     metadata:
       labels:
-        k8s-app: traefik-ingress-lb
-        name: traefik-ingress-lb
+        app: traefik
+        name: traefik
     spec:
-      serviceAccountName: traefik-ingress-controller
+      serviceAccountName: traefik
       terminationGracePeriodSeconds: 60
       containers:
       - image: traefik:1.7.26
-        name: traefik-ingress-lb
+        name: traefik
         ports:
         - name: http
           containerPort: 80
@@ -34,6 +34,9 @@ spec:
         - name: https
           containerPort: 443
           hostPort: 443
+        - name: admin
+          containerPort: 8080
+          hostPort: 8080
         securityContext:
           capabilities:
             drop:
@@ -46,19 +49,21 @@ spec:
         - --metrics
         - --metrics.prometheus
         - --ping
+        - --ping.entrypoint=traefik
         - --logLevel=INFO
-        - --defaultentrypoints=http,https
-        - --entrypoints=Name:https Address::443 TLS
+        - --defaultentrypoints=https
+        - --entrypoints=Name:https Address::443 TLS TLS.MinVersion:VersionTLS12 TLS.SniStrict:true
         - --entrypoints=Name:http Address::80
+        - --entrypoints=Name:traefik Address::8080
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: traefik-ingress-service
+  name: traefik
   namespace: kube-system
 spec:
   selector:
-    k8s-app: traefik-ingress-lb
+    app: traefik
   ports:
     - protocol: TCP
       port: 80
