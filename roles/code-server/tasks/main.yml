@@ -9,4 +9,4 @@
     - name: "code-server-ingress.yaml.j2"
       type: "template"
   tags:
-    - now
+    - code-server

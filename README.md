@@ -7,11 +7,19 @@ cluster. Use powerful cloud servers for your workshop. Remove
 the software installment hassle on local laptops. Upon setup, 
 participants ...
 
-* work on their own server in e.g. _Hetzner_ or _Digital Ocean_ cloud
-* edit the workshop files on their laptop transparently via _SSH/VSCode_ (or directly on the server using _vim/emacs/joe_)
+* work on their own server in _Hetzner_ cloud
+* edit the workshop files in the browser
 * install, configure and launch workshop related software
 
 ![alt](docs/workshop-login.png)
+
+## TL;DR
+
+```bash
+cd infrastructure && tf apply
+tf output ansible_inventory > ../inventory/all.yaml
+cd .. && ansible-playbook site.yaml
+```
 
 ## Documentation
 
@@ -37,14 +45,6 @@ and select `/home/workshop/observability-workshop` to gain access to the
 workshops resources.
 
 ![alt](docs/vscode_open_remote_folder.png)
-
-## TL;DR
-
-```bash
-cd infrastructure && tf apply
-tf output ansible_inventory > ../inventory/all.yaml 
-cd ..
-```
 
 ## Questions?
 
