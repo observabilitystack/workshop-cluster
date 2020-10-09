@@ -1,0 +1,10 @@
+---
+- name: create target directories
+  file:
+    name: /etc/certficates
+    state: directory
+
+- name: write tls wildcard cert
+  copy:
+    dest: "/etc/certficates/{{ inventory_hostname }}.pem"
+    content: "{{ acme_cert }}"

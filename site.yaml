@@ -1,0 +1,12 @@
+---
+- hosts: all
+  roles:
+    - ssh-keys
+    - motd
+    - tls
+
+- hosts: all
+  roles:
+    - kubernetes
+    - workshop-content
+    - code-server

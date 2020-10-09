@@ -7,11 +7,19 @@ cluster. Use powerful cloud servers for your workshop. Remove
 the software installment hassle on local laptops. Upon setup, 
 participants ...
 
-* work on their own server in e.g. _Hetzner_ or _Digital Ocean_ cloud
-* edit the workshop files on their laptop transparently via _SSH/VSCode_ (or directly on the server using _vim/emacs/joe_)
+* work on their own server in _Hetzner_ cloud
+* edit the workshop files in the browser
 * install, configure and launch workshop related software
 
 ![alt](docs/workshop-login.png)
+
+## TL;DR
+
+```bash
+cd infrastructure && tf apply
+tf output ansible_inventory > ../inventory/all.yaml
+cd .. && ansible-playbook site.yaml
+```
 
 ## Documentation
 
@@ -38,4 +46,12 @@ workshops resources.
 
 ![alt](docs/vscode_open_remote_folder.png)
 
+## Questions?
 
+Do not hesitate to contact us by E-Mail, Twitter or [Slack](https://o12stack.slack.com/) if you have any questions:
+
+👨‍💻 | Torsten Köster | Nikolaus Winter
+---|------------ | -------------
+🌐 | [thiswayup.de](https://www.thiswayup.de) | [nikolauswinter.de](https://www.nikolauswinter.de)
+📧 | [tbk@thiswayup.de](mailto:tbk@thiswayup.de) | [training@nikolauswinter.de](mailto:training@nikolauswinter.de)
+🐦 | [@tboeghk](https://twitter.com/tboeghk) | [@backstreetkiwi](https://twitter.com/backstreetkiwi)

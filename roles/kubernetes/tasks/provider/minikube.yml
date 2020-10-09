@@ -1,0 +1,29 @@
+---
+- name: Install minkube prerequisites
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - conntrack-tools
+    - socat
+    - tc
+
+- name: install minikube
+  get_url:
+    dest: /usr/local/bin/minikube
+    mode: 0755
+    url: https://storage.googleapis.com/minikube/releases/{{ minikube.version }}/minikube-linux-amd64
+
+- name: start minikube
+  command: minikube start --vm-driver=none
+  args:
+    creates: /root/.minikube
+
+- name: enable minikube addons
+  command: "/usr/local/bin/minikube addons enable {{ item }}"
+  args:
+    creates: "/etc/kubernetes/addons/{{ item }}-*.yml"
+  loop:
+    - metrics-server
+    - dashboard
+    - heapster
