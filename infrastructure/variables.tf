@@ -6,7 +6,7 @@ variable "server_names" {
   type = set(string)
   default = [
 #    "evolving-lionfish",
-#    "wired-lizard",
+    "wired-lizard",
 #    "flowing-tadpole",
 #    "touched-firefly",
 #    "super-eft",
@@ -24,7 +24,7 @@ variable "server_names" {
 #    "informed-wildcat",
 #    "hopeful-chamois",
 #    "choice-fox",
-    "hardy-gnu",
+#    "hardy-gnu",
 #    "rational-akita",
 #    "unique-osprey",
 #    "teaching-perch",

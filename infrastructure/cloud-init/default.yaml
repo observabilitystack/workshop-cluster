@@ -10,15 +10,6 @@ groups:
   - docker
 
 users:
-  - name: trainer
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: 
-      - workshop
-      - docker
-    shell: /bin/bash
-    ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDARWYEWnmadVHdutkneku0Rbbn+Ix83ZZH3Lyge3bmE12SAloiU580gmQKewSox4pIcKTTIgA7NKaW1nRexH7nc90Mmefhzr8u8pENKW/zuCcfA6Wvh0/q1YFNMaxEnWjIGTBebYD04tgTMcT85L3cv79L7nziZKHZNdBtBTmM/iVBipMq935u66HFXy0g1Kse7ebL/zZqPWdqqa8YD7jv9ftNgga6FzPlmJKegb10oFKY3542MgrgVfB5Hiq8ATWO/RuVN/iMdXYk6Q++TQoNxfAhqabmAlmbCPfdrH0GPNM+bY1olOVhuT69gSwt1qr0cCI7XIlqt7suiDucgECGmMUDCEV09yV1EiLaeJeOnsauFDu6gcNYw+ECMlu5GfKLlf1R++HH6Zjx/lALqQ4lbhbHlKUGkUzPEUtFLQchALdW2DQ0muRtES+Rdwivko4Ncp+S4L8948vSQzW96DiRKwGsN26IUEVHvZAAkpePsOZKyIR4QVt5QZ2qYZ0u1+f3xdWzRZThiSJmbrUilMJwzkbN9w0CG7Kcxsj0iXqzgNBd/dHWvRyXb0e78gnpEJSmFKMugeCFf36rqYP+ukLzTaOopWn+j4FW9UOdsAfwk1ld7vqtrtq/zb7EJrxKOHgQQyzNlhwizTFp7/RUBt0MqKZ4wS9EBrQZfugkjtSW4Q==
   - name: workshop
     sudo: ALL=(ALL) NOPASSWD:ALL
     no_user_group: true
@@ -102,29 +93,6 @@ write_files:
       # Custom additions
     owner: root:root
     permissions: '0644'
-  - path: /home/trainer/.bashrc
-    content: |
-      # Source global definitions
-      if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
-      fi
-
-      # expand path
-      export PATH=/usr/local/bin:$${PATH}
-
-      # User specific aliases and functions
-      alias cp='cp -i'
-      alias mv='mv -i'
-      alias rm='rm -i'
-      alias df='df -h'
-      alias ll='ls -l'
-
-      # set domain name in environment
-      export DOMAIN_NAME=${workshop_domain}
-
-      # Custom additions
-    owner: root:root
-    permissions: '0644'
   - path: /home/workshop/.bashrc
     content: |
       # Source global definitions
@@ -158,7 +126,6 @@ runcmd:
 
   # workshop gid
   - groupmod -g 3000 workshop
-  - usermod -u 2000 trainer
   - usermod -u 3000 workshop
   - chown trainer:workshop /home/trainer
   - chown workshop:workshop /home/workshop
