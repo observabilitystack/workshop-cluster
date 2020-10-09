@@ -9,7 +9,7 @@ data:
     bind-addr: 127.0.0.1:8080
     auth: none
     cert: false
-    install-extension: ms-kubernetes-tools.vscode-kubernetes-tools
+    # install-extension: ms-kubernetes-tools.vscode-kubernetes-tools
 ---
 apiVersion: apps/v1
 kind: Deployment
