@@ -9,10 +9,8 @@ workshop:
     - name: "Nikolaus Winter"
       ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDARWYEWnmadVHdutkneku0Rbbn+Ix83ZZH3Lyge3bmE12SAloiU580gmQKewSox4pIcKTTIgA7NKaW1nRexH7nc90Mmefhzr8u8pENKW/zuCcfA6Wvh0/q1YFNMaxEnWjIGTBebYD04tgTMcT85L3cv79L7nziZKHZNdBtBTmM/iVBipMq935u66HFXy0g1Kse7ebL/zZqPWdqqa8YD7jv9ftNgga6FzPlmJKegb10oFKY3542MgrgVfB5Hiq8ATWO/RuVN/iMdXYk6Q++TQoNxfAhqabmAlmbCPfdrH0GPNM+bY1olOVhuT69gSwt1qr0cCI7XIlqt7suiDucgECGmMUDCEV09yV1EiLaeJeOnsauFDu6gcNYw+ECMlu5GfKLlf1R++HH6Zjx/lALqQ4lbhbHlKUGkUzPEUtFLQchALdW2DQ0muRtES+Rdwivko4Ncp+S4L8948vSQzW96DiRKwGsN26IUEVHvZAAkpePsOZKyIR4QVt5QZ2qYZ0u1+f3xdWzRZThiSJmbrUilMJwzkbN9w0CG7Kcxsj0iXqzgNBd/dHWvRyXb0e78gnpEJSmFKMugeCFf36rqYP+ukLzTaOopWn+j4FW9UOdsAfwk1ld7vqtrtq/zb7EJrxKOHgQQyzNlhwizTFp7/RUBt0MqKZ4wS9EBrQZfugkjtSW4Q=="
   participants:
-    - name: alice
-      ssh_key: ""
-#    - name: bob
-#    - name: charlie
+    - name: teerat
+      ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINmldGNUxSzwks8IFrw9WSZk92e4gqdpMYn6E657j5Se"
   source:
     repo: https://github.com/observabilitystack/k8s-observability-workshop.git
     dest: /home/workshop/observability-workshop

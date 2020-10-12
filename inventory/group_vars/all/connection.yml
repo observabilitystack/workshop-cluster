@@ -1,19 +1,5 @@
 
 ---
-# ---------------------------------------------------------------------
-# remote connection settings
-# ---------------------------------------------------------------------
-
-# Connections to these ports are allowed through the firewall. Access
-# is allowed from the given origin ips.
-firewall:
-  ports:
-    - 22
-    - 80
-    - 443
-  origin:
-    - "{{ lookup('url', 'https://canihazip.com/s') }}"
-
 # This depends on the image and/or provider u are using. In our case,
 # centos at Hetzner uses root as first default user
 ansible_user: root
