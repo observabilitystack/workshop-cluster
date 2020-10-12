@@ -1,3 +1,13 @@
+- name: assert workshop user ownership
+  file:
+    name: "/home/workshop/{{ item }}"
+    owner: workshop
+  loop:
+    - .ssh
+    - .ssh/authorized_keys
+  tags:
+    - ssh:keys
+
 - name: Place ssh keys for user workshop
   authorized_key:
     user: workshop
