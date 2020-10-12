@@ -24,8 +24,6 @@
       type: "file"
     - name: "traefik-ds.yaml"
       type: "file"
-    - name: "traefik-redirect-http.yaml"
-      type: "file"
     - name: "traefik-ui.yaml.j2"
       type: "template"
   tags:
