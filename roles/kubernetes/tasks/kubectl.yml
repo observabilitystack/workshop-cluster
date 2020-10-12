@@ -19,13 +19,12 @@
       - README.md
 
 - name: add bash login hints to user workshop
-  lineinfile:
-    path: /home/workshop/.bashrc
-    line: "{{ item }}"
-  loop:
-    - 'echo "----------------------------------------------------" && df -ht ext4'
-    - 'echo "----------------------------------------------------" && kubectl get nodes && kubectl describe nodes | grep -A 6 --color=never -e "^Allocated resources"' # noqa 204
-    - 'echo "----------------------------------------------------"'
+  copy:
+    src: k8s-info.sh
+    dest: /etc/profile.d/k8s-info.sh
+    mode: 0755
+  tags:
+    - motd
 
 - name: install k8s module requirements
   pip:
