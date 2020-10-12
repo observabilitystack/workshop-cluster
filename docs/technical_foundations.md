@@ -2,7 +2,8 @@
 
 * __Automate everything__
   * Use _Terraform_ for volatile infrastructure (servers, DNS records, certificates)
-  * Use _Ansible_ to provision servers
+  * Use _Cloud-Init_ for static provisioning (packages, users)
+  * Use _Ansible_ to provision servers (motd, SSH keys, workshop content)
   * Logging in for provisoning is an anti-pattern!
 * __Security__
   * Participants log in using the `workshop` ssh user using their ssh key
