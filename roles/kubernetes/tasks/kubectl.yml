@@ -18,6 +18,21 @@
       - LICENSE
       - README.md
 
+- name: install helm
+  unarchive:
+    src: https://get.helm.sh/helm-v3.3.4-linux-amd64.tar.gz
+    remote_src: yes
+    dest: /usr/local/bin
+    mode: 0755
+    exclude:
+      - LICENSE
+      - README.md
+    extra_opts:
+    - --transform
+    - s/^linux-amd64//
+  tags:
+    - helm
+
 - name: add bash login hints to user workshop
   copy:
     src: k8s-info.sh
