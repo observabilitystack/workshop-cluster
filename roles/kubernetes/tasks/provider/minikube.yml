@@ -6,7 +6,16 @@
     packages:
     - conntrack-tools
     - socat
+    - ebtables
     - tc
+
+- name: fix iptables settings
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: "1"
+    sysctl_set: yes
+    state: present
+    reload: yes
 
 - name: install minikube
   get_url:
@@ -14,10 +23,15 @@
     mode: 0755
     url: https://storage.googleapis.com/minikube/releases/{{ minikube.version }}/minikube-linux-amd64
 
+- name: disable minikube update warnings
+  command: minikube config set WantUpdateNotification false
+  loop:
+    - minikube config set WantUpdateNotification false
+
 - name: start minikube
   command: minikube start --vm-driver=none
   args:
-    creates: /root/.minikube
+    creates: /root/.minikube/machines/minikube
 
 - name: enable minikube addons
   command: "/usr/local/bin/minikube addons enable {{ item }}"
@@ -26,4 +40,3 @@
   loop:
     - metrics-server
     - dashboard
-    - heapster
