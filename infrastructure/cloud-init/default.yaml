@@ -122,7 +122,7 @@ runcmd:
   # yum repos cannot be added in cloud-init 19.4
   # https://github.com/canonical/cloud-init/pull/340
   - dnf -y install epel-release
-  - dnf -y install joe vim emacs nano wget git zip unzip lsof telnet strace vim-enhanced tcpdump nc screen htop iotop sl bind-utils pv dos2unix sysstat psmisc yum-utils jq ncdu bash-completion tar
+  - dnf -y install joe vim emacs nano wget git zip unzip lsof telnet strace vim-enhanced tcpdump nc screen htop iotop sl bind-utils pv dos2unix sysstat psmisc yum-utils jq ncdu bash-completion tar stress
 
   # workshop gid
   - groupmod -g 3000 workshop
