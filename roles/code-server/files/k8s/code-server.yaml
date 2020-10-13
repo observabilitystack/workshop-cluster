@@ -47,6 +47,8 @@ spec:
           subPath: config.yaml
         - name: bin-kubectl
           mountPath: /usr/local/bin/kubectl
+        - name: bin-k9s
+          mountPath: /usr/local/bin/k9s
         - name: bin-helm
           mountPath: /usr/local/bin/helm
       volumes:
@@ -56,6 +58,10 @@ spec:
       - name: bin-kubectl
         hostPath:
           path: /usr/bin/kubectl
+          type: File
+      - name: bin-k9s
+        hostPath:
+          path: /usr/local/bin/k9s
           type: File
       - name: bin-helm
         hostPath:
