@@ -6,7 +6,7 @@
   tasks:
     - name: Assign servers to participants
       debug:
-        msg: "{{ participant.name }} --> {{ groups['all'][ i ] }}.{{ workshop_domain }}"
+        msg: "{{ participant.name }} --> {{ groups['all'][ i ] }}"
       loop: "{{ workshop.participants }}"
       loop_control:
         label: "{{ participant.name }}"
