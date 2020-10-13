@@ -45,10 +45,22 @@ spec:
         - name: code-server-config
           mountPath: /home/coder/.config/code-server/config.yaml
           subPath: config.yaml
+        - name: bin-kubectl
+          mountPath: /usr/local/bin/kubectl
+        - name: bin-helm
+          mountPath: /usr/local/bin/helm
       volumes:
       - name: workshop-home
         hostPath:
           path: /home/workshop
+      - name: bin-kubectl
+        hostPath:
+          path: /usr/bin/kubectl
+          type: File
+      - name: bin-helm
+        hostPath:
+          path: /usr/local/bin/helm
+          type: File
       - name: code-server-config
         configMap:
           name: code-server-config
