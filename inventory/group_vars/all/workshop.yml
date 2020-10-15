@@ -15,6 +15,10 @@ workshop:
       ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDkbMYxLIXYPiwci4Z/72A58hMNPq4b3m9dR35wUS5AEaDHgTygw+6U+6oxmJUlHcoS2t55TBMJ8LOa3MFXBT6vWPmHlh3ciUDdZPA/kvHIb933OLaq7+u1PITyvS+DcwG6DcP3wzsrWHNB8LBshwkB+ceLHpH6OgJc5uEwdosm8UVgkVqf0szc5JWvTjAd3nd9kpxpVIa1CQBsULmcqgmFIMCOjm7rWGdrA6QjBnmcL0pKf/5aJhpZzlOlE83GmycJ+lQ4W9mxkCrzun3cNijB3DSUtDy5kJhOKwDos9xQ81wf5YO3/1kQjGEusIq234dZkUUVDR2dX18S9wn02KYi5NZDqwK+seOP7t+YRIim1yRnTTEgK6zYinsCEJOqfqdE8sF1Kduge9YLFwheo7Wl6OVYnyAR8lPXfrGYddymHgxn9KmeAlGw55Ybvi7v/qd0UaESkeVE2tDdAPcXgrfzEoDsSfDOFvnIeiyiRdBcpUC/+jWFOpyu5nn043On/lxYo1k7LeL2RDxRTLLYpDklPvQ/IwJtc7XYdvjZ/B40DjZJlZohwgAy99V3GDlp37VwDVgTedG2pQfQMUKnuzBAqRO5KaD3VeV9P/GDqtONbG5wkd/KssZz3+RNBcxYJzew8BeGBstwBA2aLrX9g8sGMR9yAyZljWIoXe9zj4PylQ=="
     - name: helge
       ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIB/I69YXZe7Ep5ZIVo6R6PBX33ICL7u5FEX45DLurRS"
+    - name: dennis
+      ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbLP2aitD7qU9gCwqSSvYvZII1r5Pg4tEfezP5TnveQ"
+    - name: adrian
+      ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKc64ntWc6uEXYl44TMQfXv0eLbgLBqHQFrr1eviJTp8"
   source:
     repo: https://github.com/observabilitystack/k8s-observability-workshop.git
     dest: /home/workshop/observability-workshop
