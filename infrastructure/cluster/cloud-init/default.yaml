@@ -10,66 +10,66 @@ groups:
   - docker
 
 users:
+  - name: terraform
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${terraform_ssh_public_key}
+  - name: trainer
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4
   - name: workshop
     sudo: ALL=(ALL) NOPASSWD:ALL
     no_user_group: true
-    groups: 
+    groups:
       - workshop
       - docker
     shell: /bin/bash
 
-#yum_repos:
-#  epel-modular:
-#    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/Modular/$basearch
-#    enabled: true
-#    gpgcheck: true
-#    gpgkey: https://mirror.de.leaseweb.net/epel/RPM-GPG-KEY-EPEL-8
-#    name: Extra Packages for Enterprise Linux Modular $releasever - $basearch
-#  epel:
-#    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/Everything/$basearch
-#    enabled: true
-#    gpgcheck: true
-#    gpgkey: https://mirror.de.leaseweb.net/epel/RPM-GPG-KEY-EPEL-8
-#    name: Extra Packages for Enterprise Linux $releasever - $basearch
-#    
-
-#packages:
-#  - joe
-#  - vim
-#  - emacs
-#  - nano
-#  - wget
-#  - git
-#  - zip
-#  - unzip
-#  - lsof
-#  - telnet
-#  - strace
-#  - vim-enhanced
-#  - tcpdump
-#  - nc
-#  - screen
-#  - htop
-#  - iotop
-#  - sl
-#  - bind-utils
-#  - pv
-#  - dos2unix
-#  - sysstat
-#  - psmisc
-#  - yum-utils
-#  - jq
-#  - ncdu
-#  - bash-completion
-#  - tar
+packages:
+  - unattended-upgrades
+  - apt-listchanges
+  - apt-transport-https
+  - gnupg-agent
+  - gnupg
+  - ca-certificates
+  - lsb-release
+  - curl
+  - jq
+  - joe
+  - vim
+  - emacs
+  - nano
+  - wget
+  - git
+  - zip
+  - unzip
+  - telnet
+  - strace
+  - netcat
+  - screen
+  - htop
+  - iotop
+  - dnsutils
+  - stress
 
 write_files:
-  - path: /etc/sysconfig/selinux
-    content: |
-      SELINUX=disabled
-      SELINUXTYPE=targeted
+  - path: /etc/ssh/sshd_config
     owner: root:root
     permissions: '0644'
+    content: |
+      PermitRootLogin no
+      PasswordAuthentication no
+      ChallengeResponseAuthentication no
+      UsePAM yes
+      AllowAgentForwarding yes
+      AllowTcpForwarding yes
+      X11Forwarding no
+      PrintMotd no
+      AcceptEnv LANG LC_* EDITOR
+      Subsystem sftp	/usr/lib/openssh/sftp-server
   - path: /root/.bashrc
     content: |
       # Source global definitions
@@ -119,11 +119,6 @@ write_files:
 
 
 runcmd:
-  # yum repos cannot be added in cloud-init 19.4
-  # https://github.com/canonical/cloud-init/pull/340
-  - dnf -y install epel-release
-  - dnf -y install joe vim emacs nano wget git zip unzip lsof telnet strace vim-enhanced tcpdump nc screen htop iotop sl bind-utils pv dos2unix sysstat psmisc yum-utils jq ncdu bash-completion tar stress
-
   # workshop gid
   - groupmod -g 3000 workshop
   - usermod -u 3000 workshop
@@ -141,9 +136,9 @@ runcmd:
   - ln -s /usr/bin/sha256sum /usr/bin/shasum
 
   # install bat
-  - wget https://github.com/sharkdp/bat/releases/download/v0.16.0/bat-v0.16.0-x86_64-unknown-linux-musl.tar.gz
-  - tar zxf bat-v0.16.0-x86_64-unknown-linux-musl.tar.gz
-  - mv bat-v0.16.0-x86_64-unknown-linux-musl/bat /usr/local/bin/bat
+  - wget https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-v0.22.1-x86_64-unknown-linux-gnu.tar.gz
+  - tar xzvf bat-v0.22.1-x86_64-unknown-linux-gnu.tar.gz -C /usr/local/bin/ --wildcards --no-anchored 'bat'
+  - chmod 755 /usr/local/bin/bat
 
   # create general payload directory
   - mkdir -p /www

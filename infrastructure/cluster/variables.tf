@@ -1,11 +1,22 @@
-variable "hcloud_token" {}
 
+# Feed from secrets.auto.tfvars
+variable "hcloud_token" {}
 variable "do_token" {}
+
+variable "domain" {
+  type = string
+  default = "workshop.o11ystack.org"
+}
+
+variable "acme_email_address" {
+  type = string
+  default = "nobody@o11ystack.org"
+}
 
 variable "server_names" {
   type = set(string)
   default = [
-#    "evolving-lionfish",
+    "evolving-lionfish",
 #    "wired-lizard",
 #    "flowing-tadpole",
 #    "touched-firefly",
@@ -20,22 +31,22 @@ variable "server_names" {
 #    "touched-camel",
 #    "trusting-garfish",
 #    "solid-toucan",
-    "giving-panda",
-    "informed-wildcat",
-    "hopeful-chamois",
-    "choice-fox",
-    "hardy-gnu",
-    "rational-akita",
-    "unique-osprey",
-    "teaching-perch",
-    "generous-starfish",
-    "quality-terrapin",
-    "driven-javelin",
-    "legal-ringtail",
-    "adapted-cat",
-    "crack-finch",
-    "above-kangaroo",
-    "thorough-lark",
+#    "giving-panda",
+#    "informed-wildcat",
+#    "hopeful-chamois",
+#    "choice-fox",
+#    "hardy-gnu",
+#    "rational-akita",
+#    "unique-osprey",
+#    "teaching-perch",
+#    "generous-starfish",
+#    "quality-terrapin",
+#    "driven-javelin",
+#    "legal-ringtail",
+#    "adapted-cat",
+#    "crack-finch",
+#    "above-kangaroo",
+#    "thorough-lark",
 #    "relevant-lion",
 #    "divine-kid",
 #    "peaceful-firefly",
@@ -204,29 +215,6 @@ variable "server_names" {
 #    "one-hyena",
 #    "feasible-katydid",
 #    "definite-owl",
-#    "stirring-goshawk"    
-  ]
-}
-
-variable "domain" {
-  type = string
-  default = "k8s.o12stack.org"
-}
-
-variable "acme_email_address" {
-  type = string
-  default = "nobody@o12stack.org"
-}
-
-# names/references of all the root keys we use to
-# access and provision servers
-# The SSH public keys are stored at the cloud provider
-# under this name/these names
-# (comma separated list)
-variable "ssh_key_names" {
-  type = list(string)
-  default = [
-    "o12stack-torsten", 
-    "o12stack-nikolaus"
+#    "stirring-goshawk"
   ]
 }
