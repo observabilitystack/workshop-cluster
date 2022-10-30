@@ -1,5 +1,6 @@
 
 ---
-# This depends on the image and/or provider u are using. In our case,
-# centos at Hetzner uses root as first default user
-ansible_user: root
+# This depends on the image and/or provider u are using. We are supplying
+# the 'trainer' user with sudo rights and our SSH keys during the Terraform
+# setup phase
+ansible_user: trainer

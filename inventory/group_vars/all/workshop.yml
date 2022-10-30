@@ -15,7 +15,7 @@ workshop:
   source:
     repo: https://github.com/observabilitystack/k8s-observability-workshop.git
     dest: /home/workshop/observability-workshop
-  domain: k8s.o12stack.org
+  domain: workshop.o11ystack.org
 
 minikube:
   version: v1.13.1

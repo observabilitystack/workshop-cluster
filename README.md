@@ -2,13 +2,13 @@
 
 ![Travis CI build status](https://travis-ci.org/observabilitystack/workshop-cluster.svg?branch=master)
 
-This repository holds resources to set up a general workshop 
-cluster. Remove the software installment hassle on local 
+This repository holds resources to set up a general workshop
+cluster. Remove the software installment hassle on local
 laptops and use powerful cloud servers for your workshop instead.
 Participants:
 
 * work on their own server in _Hetzner_ cloud
-* edit the workshop files in the browser, in their 
+* edit the workshop files in the browser, in their
   local IDE or in the Terminal
 * install, configure and launch workshop related software
 
@@ -21,8 +21,8 @@ We use this setup for our [Observability Workshops](https://github.com/observabi
 To get things up and running:
 
 ```bash
-cd infrastructure && tf apply
-tf output ansible_inventory > ../inventory/all.yaml && cd ..
+cd infrastructure/cluster && tf apply
+tf output -raw ansible_inventory > ../../inventory/all.yaml && cd ../..
 ansible-playbook site.yaml
 ```
 

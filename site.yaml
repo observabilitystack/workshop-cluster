@@ -1,12 +1,14 @@
 ---
 - hosts: all
+  become: true
   roles:
     - ssh-keys
     - motd
     - tls
 
-- hosts: all
-  roles:
-    - kubernetes
-    - workshop-content
-    - code-server
+#- hosts: all
+#  become: true
+#  roles:
+#    - traefik-reverse-proxy
+#    - workshop-content
+#    - code-server
