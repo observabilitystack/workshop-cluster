@@ -1,0 +1,25 @@
+[Unit]
+Description=Code Server
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+User=workshop
+Group=workshop
+EnvironmentFile=/etc/default/code-server
+
+ExecStart=/usr/bin/docker run --rm \
+    --name %N \
+    -p 18080:18080 \
+    --net o11ystack \
+    -v "/home/workshop/.config:/home/coder/.config" \
+    -v "/home/workshop/o11y:/home/coder/project" \
+    -u "${USER_ID}:${GROUP_ID}" \
+    -e "DOCKER_USER=${USER}" \
+    --label "traefik.enable=true" \
+    --label "traefik.http.routers.code-server.rule=Host(`code.{{ inventory_hostname }}`)" \
+    codercom/code-server:4.8.1
+
+[Install]
+WantedBy=multi-user.target

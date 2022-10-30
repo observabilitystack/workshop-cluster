@@ -24,7 +24,6 @@ ExecStart=/usr/bin/docker run --rm \
     --label "traefik.http.routers.ping.service=ping@internal" \
     --name %N \
     traefik:2.9.4 \
-    --api.dashboard=true
     --api.insecure=true \
     --providers.docker \
     --providers.docker.exposedByDefault=false \

@@ -28,6 +28,9 @@ resource "hcloud_server" "workshop" {
   location    = "hel1"
   ssh_keys    = [hcloud_ssh_key.root.name]
   user_data   = data.cloudinit_config.workshop.rendered
+  labels = {
+    "service" : "workshop"
+  }
 
   provisioner "remote-exec" {
     inline = [
@@ -50,6 +53,7 @@ resource "digitalocean_record" "hostname" {
 
   domain = var.domain
   type   = "A"
+  ttl    = 300
   name   = each.value.name
   value  = each.value.ipv4_address
 }
@@ -62,6 +66,7 @@ resource "digitalocean_record" "wildcard" {
 
   domain = var.domain
   type   = "CNAME"
+  ttl    = 300
   name   = "*.${each.value.name}"
   value  = "${each.key}.${var.domain}."
 }

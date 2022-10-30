@@ -1,12 +1,45 @@
+- name: create project directory
+  file:
+    name: /home/workshop/o11y
+    state: directory
+    owner: workshop
+    group: workshop
+
+- name: create config directory
+  file:
+    name: /home/workshop/.config/code-server
+    state: directory
+    owner: workshop
+    group: workshop
+
 - name: configure code-server
-  become: true
-  become_user: workshop
-  k8s:
-    definition: "{{ lookup(item.type, 'k8s/' + item.name) }}"
-  loop:
-    - name: "code-server.yaml"
-      type: "file"
-    - name: "code-server-ingress.yaml.j2"
-      type: "template"
-  tags:
-    - code-server
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /home/workshop/.config/code-server/config.yaml
+    owner: workshop
+    group: workshop
+    mode: '0644'
+
+- name: configure code-server environment
+  ansible.builtin.shell: |
+    cat << EOF > /etc/default/code-server
+    USER=workshop
+    USER_ID=$(id -u workshop)
+    GROUP_ID=$(id -g workshop)
+    EOF
+  args:
+    creates: /etc/default/code-server
+
+- name: configure systemd service
+  ansible.builtin.template:
+    src: code-server.service.j2
+    dest: /etc/systemd/system/code-server.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: launch systemd service
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    name: code-server
