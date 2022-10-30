@@ -67,7 +67,7 @@ resource "digitalocean_record" "wildcard" {
 }
 
 # ---------------------------------------------------------------------
-# Write a local Ansible inventory
+# Write an Ansible inventory
 # ---------------------------------------------------------------------
 locals {
   ansible_inventory = <<EOT
@@ -78,9 +78,10 @@ all:
       acme_cert: |
         ${indent(8, join("\n", [
   acme_certificate.certificate[server.name].certificate_pem,
-  acme_certificate.certificate[server.name].issuer_pem,
-  acme_certificate.certificate[server.name].private_key_pem
+  acme_certificate.certificate[server.name].issuer_pem
 ]))}
+      acme_private_key: |
+        ${indent(8, acme_certificate.certificate[server.name].private_key_pem)}
     %{~endfor~}
 EOT
 }

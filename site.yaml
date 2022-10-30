@@ -6,9 +6,9 @@
     - motd
     - tls
 
-#- hosts: all
-#  become: true
-#  roles:
-#    - traefik-reverse-proxy
+- hosts: all
+  become: true
+  roles:
+    - traefik-reverse-proxy
 #    - workshop-content
 #    - code-server
