@@ -14,7 +14,7 @@ ExecStart=/usr/bin/docker run --rm \
     -p 18080:18080 \
     --net o11ystack \
     -v "/home/workshop/.config:/home/coder/.config" \
-    -v "/home/workshop/o11y:/home/coder/project" \
+    -v "/home/workshop/o11y:/home/coder/o11y" \
     -u "${USER_ID}:${GROUP_ID}" \
     -e "DOCKER_USER=${USER}" \
     --label "traefik.enable=true" \

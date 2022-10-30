@@ -11,4 +11,4 @@
   roles:
     - traefik-reverse-proxy
     - code-server
-#    - workshop-content
+    - workshop-content

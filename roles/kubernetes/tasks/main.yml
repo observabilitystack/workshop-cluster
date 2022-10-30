@@ -1,5 +1,0 @@
----
-- include: kubectl.yml
-- include: provider/minikube.yml
-- include: kubeconfig.yml
-- include: traefik-ingress.yml
