@@ -29,6 +29,10 @@ runcmd:
   - apt-get update
   - apt-get install -y docker-ce docker-ce-cli containerd.io
 
+  # Install Docker Compose
+  - curl -sfLo /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/v2.12.1/docker-compose-linux-x86_64"
+  - chmod +x /usr/local/bin/docker-compose
+
   # Enable & Start Docker
   - systemctl enable docker
   - systemctl start docker

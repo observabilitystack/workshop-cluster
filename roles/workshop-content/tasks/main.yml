@@ -3,6 +3,7 @@
   become: true
   become_user: workshop
   git:
-    repo: "{{ workshop.source.repo }}"
-    dest: "{{ workshop.source.dest }}"
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
     version: main
+  with_items: "{{workshop.repos}}"

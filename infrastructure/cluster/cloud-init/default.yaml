@@ -20,6 +20,9 @@ users:
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4
+    groups:
+      - workshop
+      - docker
   - name: workshop
     sudo: ALL=(ALL) NOPASSWD:ALL
     no_user_group: true
@@ -70,7 +73,7 @@ write_files:
       PrintMotd no
       AcceptEnv LANG LC_* EDITOR
       Subsystem sftp	/usr/lib/openssh/sftp-server
-  - path: /root/.bashrc
+  - path: /root/.profile
     content: |
       # Source global definitions
       if [ -f /etc/bashrc ]; then
@@ -89,11 +92,12 @@ write_files:
 
       # set domain name in environment
       export DOMAIN_NAME=${workshop_domain}
+      export HOSTNAME=$${HOSTNAME}
 
       # Custom additions
     owner: root:root
     permissions: '0644'
-  - path: /home/workshop/.bashrc
+  - path: /home/workshop/.profile
     content: |
       # Source global definitions
       if [ -f /etc/bashrc ]; then
@@ -112,6 +116,7 @@ write_files:
 
       # set domain name in environment
       export DOMAIN_NAME=${workshop_domain}
+      export HOSTNAME=$${HOSTNAME}
 
       # Custom additions
     owner: root:root
