@@ -1,0 +1,8 @@
+- name: Add secrets to environment
+  ansible.builtin.blockinfile:
+    path: "{{ item }}"
+    block: |
+      HCLOUD_TOKEN={{ hcloud_token }}
+  with_items:
+    - /root/.profile
+    - /home/workshop/.profile

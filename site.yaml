@@ -5,6 +5,7 @@
     - ssh-keys
     - motd
     - tls
+    - account
 
 - hosts: all
   become: true
