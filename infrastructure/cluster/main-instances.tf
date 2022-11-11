@@ -24,7 +24,7 @@ resource "hcloud_server" "workshop" {
 
   name        = each.key
   image       = "debian-11"
-  server_type = "cpx41"
+  server_type = "cpx21"
   location    = "hel1"
   ssh_keys    = [hcloud_ssh_key.root.name]
   user_data   = data.cloudinit_config.workshop.rendered
