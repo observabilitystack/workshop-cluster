@@ -17,7 +17,7 @@ variable "server_names" {
   type = set(string)
   default = [
     "evolving-lionfish",
-    "wired-lizard",
+#    "wired-lizard",
 #    "flowing-tadpole",
 #    "touched-firefly",
 #    "super-eft",
