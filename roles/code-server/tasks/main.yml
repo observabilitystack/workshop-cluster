@@ -30,6 +30,25 @@
   args:
     creates: /etc/default/code-server
 
+- name: generate SSH key pair to connect to own machine
+  community.crypto.openssh_keypair:
+    path: /home/workshop/.ssh/id_ed25519
+    type: ed25519
+    owner: workshop
+    group: workshop
+
+- name: read created public key
+  register: workshop_ssh_public_key
+  ansible.builtin.slurp:
+    src: /home/workshop/.ssh/id_ed25519.pub
+
+- name: authorize newly created key
+  ansible.posix.authorized_key:
+    user: workshop
+    state: present
+    key: "{{ workshop_ssh_public_key['content'] | b64decode }}"
+    key_options: 'environment="REMOTE_USER=workshop"'
+
 - name: configure systemd service
   ansible.builtin.template:
     src: code-server.service.j2
@@ -37,6 +56,8 @@
     owner: root
     group: root
     mode: '0644'
+  tags:
+    - ssh
 
 - name: launch systemd service
   ansible.builtin.systemd:
