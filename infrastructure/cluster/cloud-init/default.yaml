@@ -14,21 +14,15 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - ${terraform_ssh_public_key}
-  - name: trainer
-    shell: /bin/bash
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4
-    groups:
-      - workshop
-      - docker
   - name: workshop
     sudo: ALL=(ALL) NOPASSWD:ALL
     no_user_group: true
     groups:
       - workshop
       - docker
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4
     shell: /bin/bash
 
 packages:
@@ -57,6 +51,8 @@ packages:
   - iotop
   - dnsutils
   - stress
+  - python3
+  - python3-pip
 
 write_files:
   - path: /etc/ssh/sshd_config
@@ -127,8 +123,7 @@ runcmd:
   # workshop gid
   - groupmod -g 3000 workshop
   - usermod -u 3000 workshop
-  - chown trainer:workshop /home/trainer
-  - chown workshop:workshop /home/workshop
+  - chown -R workshop:workshop /home/workshop
 
   # acquire hcloud meta data
   - mkdir -p /etc/ansible/facts.d

@@ -1,5 +1,5 @@
 terraform {
-  # synchronize cluster state across trainers
+  # synchronize cluster state
   backend "remote" {
     organization = "o11ystack"
     workspaces {

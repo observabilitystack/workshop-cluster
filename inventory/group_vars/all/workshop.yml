@@ -9,8 +9,9 @@ workshop:
     - name: "Henrik Niklaus"
       ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4"
   participants:
-    - name: bernd
-      ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3XjInPzGn/qp3FOrqmOMQFmXf8n3u30vYUa0TFgZYjWUHlWvQh00aTcTRoadWROt7pW4tvHyCTZPaqMSht4jOo+CXVhrtuFe2MI3KuYG02AFtTGyHka6+j0yq10oxt3vgtn368h7FbGli6WBpkZ91C0xhLxOmmOfm6MW8K2KTRdv1fEJGWwjj8uiZhsmVeVSG3iZvrUxEKmY2jTDD+rUT39c97f/DYG9abLiZky++RYNM7AZH4FuTlaqXqTAT8zs4HFECQay6JbOve5YT1eXjg9Q2eylEORVGvjdeJNrZmIpSEfidTr4MvTwdunKcgX/TEQ3ST2MMW1fJ6WBt7CqLZ1eOxzICdfctEi+FtHio5lnT2kOtG5zVJvetJoIdaTuoOkGWaV/ACOy4bVpSSlo0J5PAhztjkpFn1IamyNDZC1z+S8/hJnJ8uzN1JyfswJT+nhrWgb20FWZ3NIH69GBaJ6ZXR1qRLz4CyzFuiVL7VLCTUE5grz+bCiByVDIxjtcEsbtBWtCmSLavX6nn6jiFpxh2qMl9n96rQgB3WqKjnVFCCFhJzkSwpKOugM/y3NHC6kp4nFqc7ipYU7rVahN30GZCtPUNTu+p+QlAOBD/4wscZL32+MQozLcgegKtN0tvkipLTcBY03RYnQVt9Aa5xk6+jelQSPLZ0D1qefOFmw=="
+    - name: alice
+    - name: bob
+    - name: charlie
 
   repos:
     - repo: https://github.com/observabilitystack/o11y-workshop

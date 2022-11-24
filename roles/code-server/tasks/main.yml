@@ -56,11 +56,27 @@
     owner: root
     group: root
     mode: '0644'
-  tags:
-    - ssh
 
 - name: launch systemd service
   ansible.builtin.systemd:
     state: started
     daemon_reload: yes
     name: code-server
+
+- name: install vscode extensions
+  community.docker.docker_container_exec:
+    container: code-server
+    command: code-server --install-extension {{ item }}
+    chdir: /home/coder
+  with_items:
+    - github.github-vscode-theme
+    - bierner.markdown-preview-github-styles
+
+- name: auto-connect to instance in Terminal
+  community.docker.docker_container_exec:
+    container: code-server
+    chdir: /home/coder
+    command: |
+      bash -c "echo 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no workshop@{{ inventory_hostname }}' >> /home/coder/.bashrc"
+  tags:
+    - test

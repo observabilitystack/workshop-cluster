@@ -1,6 +1,6 @@
 
 ---
 # This depends on the image and/or provider u are using. We are supplying
-# the 'trainer' user with sudo rights and our SSH keys during the Terraform
+# the 'workshop' user with sudo rights and our SSH keys during the Terraform
 # setup phase
-ansible_user: trainer
+ansible_user: workshop
