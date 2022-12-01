@@ -10,5 +10,5 @@
   become: true
   roles:
     - traefik-reverse-proxy
-    - code-server
     - workshop-content
+    - code-server

@@ -63,6 +63,11 @@
     daemon_reload: yes
     name: code-server
 
+- name: Wait for code to be up and running
+  wait_for:
+    host: localhost
+    port: 18080
+
 - name: install vscode extensions
   community.docker.docker_container_exec:
     container: code-server
