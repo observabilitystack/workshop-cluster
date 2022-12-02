@@ -11,14 +11,23 @@ variable "hcloud_token_ro" {
 variable "domain" {
   type = string
   default = "workshop.o11ystack.org"
+  description = "The domain to register the pet servers with"
 }
 
 variable "acme_email_address" {
   type = string
   default = "nobody@o11ystack.org"
+  description = "The email to register the ACME account with"
+}
+
+variable "instance_create_count" {
+  type = number
+  default = 2
+  description = "The number of instances to create. Must be a subset or equal to the number of server_names."
 }
 
 variable "server_names" {
+  description = "The list of petnames to seed from"
   type = set(string)
   default = [
     "evolving-lionfish",
