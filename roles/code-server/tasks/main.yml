@@ -20,6 +20,19 @@
     group: workshop
     mode: '0644'
 
+- name: create settings directory
+  file:
+    name: /home/workshop/.vscode
+    state: directory
+    owner: workshop
+    group: users
+
+- name: copy settings
+  copy:
+    src: settings.json
+    dest: /home/workshop/.vscode/settings.json
+    force: no
+
 - name: configure code-server environment
   ansible.builtin.shell: |
     cat << EOF > /etc/default/code-server

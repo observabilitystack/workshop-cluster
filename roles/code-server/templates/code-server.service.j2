@@ -15,6 +15,7 @@ ExecStart=/usr/bin/docker run --rm \
     --net o11ystack \
     -v "/home/workshop/.ssh:/home/coder/.ssh" \
     -v "/home/workshop/.config:/home/coder/.config" \
+    -v "/home/workshop/.vscode:/home/coder/.vscode" \
     -v "/home/workshop/o11y-workshop:/home/coder/o11y-workshop" \
     -v "/home/workshop/spring-petclinic:/home/coder/spring-petclinic" \
     -u "${USER_ID}:${GROUP_ID}" \

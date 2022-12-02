@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    ".profile": true,
+    ".bashrc": true,
+    ".bash_logout": true,
+    ".ssh": true,
+    ".local": true,
+    ".config": true,
+  }
+}
