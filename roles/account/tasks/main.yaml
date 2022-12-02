@@ -2,7 +2,7 @@
   ansible.builtin.blockinfile:
     path: "{{ item }}"
     block: |
-      export HCLOUD_TOKEN={{ hcloud_token }}
+      export HCLOUD_TOKEN={{ hcloud_token_ro }}
   with_items:
     - /root/.profile
     - /home/workshop/.profile

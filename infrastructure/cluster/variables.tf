@@ -3,6 +3,11 @@
 variable "hcloud_token" {}
 variable "do_token" {}
 
+# fed from Variable sets in Terraform cloud
+variable "hcloud_token_ro" {
+  type = string
+}
+
 variable "domain" {
   type = string
   default = "workshop.o11ystack.org"

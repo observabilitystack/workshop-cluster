@@ -80,6 +80,7 @@ all:
   hosts:
     %{~for server in hcloud_server.workshop~}
     ${server.name}.${var.domain}:
+      hcloud_token_ro: ${var.hcloud_token_ro}
       acme_cert: |
         ${indent(8, join("\n", [
   acme_certificate.certificate[server.name].certificate_pem,
