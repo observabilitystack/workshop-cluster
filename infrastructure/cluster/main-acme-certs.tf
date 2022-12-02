@@ -25,6 +25,7 @@ resource "acme_certificate" "certificate" {
     "${each.key}.${var.domain}"
   ]
   revoke_certificate_on_destroy = false
+  recursive_nameservers = [ "8.8.8.8", "8.8.4.4" ]
 
   dns_challenge {
     provider = "digitalocean"
@@ -35,7 +36,8 @@ resource "acme_certificate" "certificate" {
 
   lifecycle {
     ignore_changes = [
-      dns_challenge
+      dns_challenge,
+      recursive_nameservers
     ]
   }
 }
