@@ -9,7 +9,7 @@ data "cloudinit_config" "workshop" {
     content_type = "text/cloud-config"
     content = templatefile("cloud-init/default.yaml", {
       workshop_domain          = var.domain,
-      hcloud_token             = var.hcloud_token,
+      hcloud_token             = var.hcloud_token_ro,
       terraform_ssh_public_key = tls_private_key.terraform.public_key_openssh
     })
   }
