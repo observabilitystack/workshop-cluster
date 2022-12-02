@@ -16,7 +16,7 @@ resource "acme_registration" "account" {
 
 # Request wildcard TLS cert
 resource "acme_certificate" "certificate" {
-  for_each = var.server_names
+  for_each = toset(var.server_names)
 
   key_type        = "P256"
   account_key_pem = acme_registration.account.account_key_pem
