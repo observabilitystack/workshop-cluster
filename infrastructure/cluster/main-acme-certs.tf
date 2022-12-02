@@ -32,4 +32,10 @@ resource "acme_certificate" "certificate" {
       DO_AUTH_TOKEN = var.do_token
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      dns_challenge.config.DO_AUTH_TOKEN
+    ]
+  }
 }
