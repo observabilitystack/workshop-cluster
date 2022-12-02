@@ -26,6 +26,10 @@ variable "instance_create_count" {
   description = "The number of instances to create. Must be a subset or equal to the number of server_names."
 }
 
+locals {
+  instance_server_names = toset(slice(tolist(var.server_names), 0, var.instance_create_count))
+}
+
 variable "server_names" {
   description = "The list of petnames to seed from"
   type = set(string)

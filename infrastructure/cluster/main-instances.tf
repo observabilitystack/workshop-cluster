@@ -1,11 +1,6 @@
 # ---------------------------------------------------------------------
 # Create the workshop servers
 # ---------------------------------------------------------------------
-resource "random_shuffle" "instance_server_names" {
-  input        = var.server_names
-  result_count = var.instance_create_count
-}
-
 data "cloudinit_config" "workshop" {
   gzip          = true
   base64_encode = true
@@ -25,7 +20,7 @@ data "cloudinit_config" "workshop" {
 }
 
 resource "hcloud_server" "workshop" {
-  for_each = random_shuffle.instance_server_names.result
+  for_each = local.instance_server_names
 
   name        = each.key
   image       = "debian-11"

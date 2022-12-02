@@ -18,6 +18,12 @@ We use this setup for our [Observability Workshops](https://github.com/observabi
 
 ## TL;DR
 
+Install necessary software:
+
+```bash
+brew install ansible terraform figlet
+```
+
 To get things up and running:
 
 ```bash
