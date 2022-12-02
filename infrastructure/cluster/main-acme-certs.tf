@@ -35,7 +35,7 @@ resource "acme_certificate" "certificate" {
 
   lifecycle {
     ignore_changes = [
-      dns_challenge.config.DO_AUTH_TOKEN
+      dns_challenge
     ]
   }
 }
