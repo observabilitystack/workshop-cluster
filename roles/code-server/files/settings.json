@@ -2,9 +2,11 @@
   "files.exclude": {
     ".profile": true,
     ".bashrc": true,
+    ".bash_history": true,
     ".bash_logout": true,
     ".ssh": true,
     ".local": true,
-    ".config": true
+    ".config": true,
+    ".vscode": true
   }
 }
