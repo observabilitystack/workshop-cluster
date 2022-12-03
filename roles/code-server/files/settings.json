@@ -8,5 +8,6 @@
     ".local": true,
     ".config": true,
     ".vscode": true
-  }
+  },
+  "workbench.colorTheme": "GitHub Dark"
 }
