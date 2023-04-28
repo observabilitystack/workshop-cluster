@@ -1,0 +1,6 @@
+---
+- name: Install hey
+  ansible.builtin.get_url:
+    url: https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
+    dest: /usr/local/bin/hey
+    mode: '0755'
