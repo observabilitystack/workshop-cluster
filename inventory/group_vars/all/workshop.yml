@@ -8,15 +8,9 @@ workshop:
       ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGY2GZU19neGfVAVuIOKt0iIMKUDDz0H72dPROsVPFen"
     - name: "Henrik Niklaus"
       ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbFL7mCPsptNwP5AZGtYsp5G0K0hC7gSjHIQY1gtSu4"
-  participants:
-    - name: alice
-    - name: bob
-    - name: charlie
 
   repos:
     - repo: https://github.com/observabilitystack/o11y-workshop
       dest: /home/workshop/o11y-workshop
-    - repo: https://github.com/observabilitystack/spring-petclinic
-      dest: /home/workshop/spring-petclinic
 
   domain: workshop.o11ystack.org

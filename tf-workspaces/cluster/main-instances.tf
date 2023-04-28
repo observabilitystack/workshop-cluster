@@ -19,11 +19,17 @@ data "cloudinit_config" "workshop" {
   }
 }
 
+data "hcloud_image" "image" {
+  name              = "debian-11"
+  with_architecture = "x86"
+  most_recent       = true
+}
+
 resource "hcloud_server" "workshop" {
   for_each = local.instance_server_names
 
   name        = each.key
-  image       = "debian-11"
+  image       = data.hcloud_image.image.id
   server_type = "cpx21"
   location    = "hel1"
   ssh_keys    = [hcloud_ssh_key.root.name]
@@ -80,6 +86,7 @@ all:
   hosts:
     %{~for server in hcloud_server.workshop~}
     ${server.name}.${var.domain}:
+      ansible_host: ${server.ipv4_address}
       hcloud_token_ro: ${var.hcloud_token_ro}
       acme_cert: |
         ${indent(8, join("\n", [

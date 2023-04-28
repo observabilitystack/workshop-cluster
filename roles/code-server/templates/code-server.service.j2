@@ -22,7 +22,7 @@ ExecStart=/usr/bin/docker run --rm \
     -e "DOCKER_USER=${USER}" \
     --label "traefik.enable=true" \
     --label "traefik.http.routers.code-server.rule=Host(`code.{{ inventory_hostname }}`)" \
-    codercom/code-server:4.8.3-bullseye
+    codercom/code-server:4.12.0-bullseye
 
 [Install]
 WantedBy=multi-user.target

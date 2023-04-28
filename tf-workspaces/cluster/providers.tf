@@ -12,15 +12,15 @@ terraform {
   required_providers {
     acme = {
       source = "vancluever/acme"
-      version = "~> 2.11.1"
+      version = "~> 2.13.1"
     }
     digitalocean = {
       source = "digitalocean/digitalocean"
-      version = "~> 2.23.0"
+      version = "~> 2.28.0"
     }
     hcloud = {
       source = "hetznercloud/hcloud"
-      version = "~> 1.35.2"
+      version = "~> 1.38.2"
     }
   }
   required_version = ">= 1.2.7"
