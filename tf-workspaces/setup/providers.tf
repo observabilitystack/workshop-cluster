@@ -3,7 +3,7 @@ terraform {
   backend "remote" {
     organization = "o11ystack"
     workspaces {
-      name = "setup-workshop-devopscon-munich-2022"
+      name = "setup-workshop-devopscon-berlin-2023"
     }
   }
 

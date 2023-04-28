@@ -3,7 +3,7 @@ terraform {
   backend "remote" {
     organization = "o11ystack"
     workspaces {
-      name = "workshop-devopscon-munich-2022"
+      name = "workshop-devopscon-berlin-2023"
     }
 
     # credentials for terraform.io are read from .terraformrc

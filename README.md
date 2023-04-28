@@ -1,7 +1,5 @@
 # Generic workshop cluster setup
 
-![Travis CI build status](https://travis-ci.org/observabilitystack/workshop-cluster.svg?branch=master)
-
 This repository holds resources to set up a general workshop
 cluster. Remove the software installment hassle on local
 laptops and use powerful cloud servers for your workshop instead.
@@ -27,7 +25,7 @@ brew install ansible terraform figlet
 To get things up and running:
 
 ```bash
-cd infrastructure/cluster && tf apply
+cd tf-workspaces/cluster && tf apply
 tf output -raw ansible_inventory > ../../inventory/all.yaml && cd ../..
 ansible-playbook site.yaml
 ```
