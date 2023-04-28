@@ -31,6 +31,8 @@
   copy:
     src: settings.json
     dest: /home/workshop/.vscode/settings.json
+    owner: workshop
+    group: workshop
     force: no
 
 - name: configure code-server environment
