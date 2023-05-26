@@ -22,7 +22,7 @@ variable "acme_email_address" {
 
 variable "instance_create_count" {
   type = number
-  default = 1
+  default = 2
   description = "The number of instances to create. Must be a subset or equal to the number of server_names."
 }
 
@@ -36,6 +36,8 @@ variable "server_names" {
   default = [
     "credible-alpaca",
     "evolving-lionfish",
+    "closing-chicken",
+#    "holy-hog",
 #    "wired-lizard",
 #    "flowing-tadpole",
 #    "touched-firefly",
@@ -118,8 +120,6 @@ variable "server_names" {
 #    "sincere-pelican",
 #    "promoted-egret",
 #    "apt-drum",
-#    "closing-chicken",
-#    "holy-hog",
 #    "eminent-insect",
 #    "evolved-lamb",
 #    "primary-puma",
