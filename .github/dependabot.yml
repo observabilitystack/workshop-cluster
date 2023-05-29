@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "/tf-workspaces/cluster"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - tboeghk
+      - henriknik
+  - package-ecosystem: "terraform"
+    directory: "/tf-workspaces/setup"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - tboeghk
+      - henriknik
